@@ -2,8 +2,13 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +55,34 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($this->isHttpException($exception)){
+            if (view()->exists('errors.' . $exception->getStatusCode())) {
+                $errors = $exception->getMessage();
+                return response()->view('errors.' . $exception->getStatusCode(), compact('errors'), $exception->getStatusCode());
+            }
+        }
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if($request->expectsJson())
+        {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        $guard = Arr::get($exception->guards(), 0);
+
+        switch($guard)
+        {
+            case 'razen_holiday':
+                $login = 'razen-holiday.login';
+                break;
+            default:
+                $login = 'razen-holiday.login';
+                break;
+        }
+
+        return redirect()->guest(route($login));
     }
 }

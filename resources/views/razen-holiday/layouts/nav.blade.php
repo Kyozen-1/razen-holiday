@@ -101,6 +101,68 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    @if (request()->routeIs('razen-holiday.landing-page.beranda.index') ||
+                    request()->routeIs('razen-holiday.landing-page.perusahaan.index') ||
+                    request()->routeIs('razen-holiday.landing-page.layanan.index') ||
+                    request()->routeIs('razen-holiday.landing-page.proyek.index') ||
+                    request()->routeIs('razen-holiday.landing-page.kontak.index'))
+                    <a href="#landing_page" class="active">
+                    @else
+                    <a href="#landing_page">
+                    @endif
+                        <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
+                        <span class="label">Landing Page</span>
+                    </a>
+                    <ul id="landing_page">
+                        <li>
+                            @if (request()->routeIs('razen-holiday.landing-page.beranda.index'))
+                                <a href="{{ route('razen-holiday.landing-page.beranda.index') }}" class="active">
+                            @else
+                                <a href="{{ route('razen-holiday.landing-page.beranda.index') }}">
+                            @endif
+                                <span class="label">Beranda</span>
+                            </a>
+                        </li>
+                        <li>
+                            @if (request()->routeIs('razen-holiday.landing-page.perusahaan.index'))
+                                <a href="{{ route('razen-holiday.landing-page.perusahaan.index') }}" class="active">
+                            @else
+                                <a href="{{ route('razen-holiday.landing-page.perusahaan.index') }}">
+                            @endif
+                                <span class="label">Perusahaan</span>
+                            </a>
+                        </li>
+                        <li>
+                            @if (request()->routeIs('razen-holiday.landing-page.layanan.index'))
+                                <a href="{{ route('razen-holiday.landing-page.layanan.index') }}" class="active">
+                            @else
+                                <a href="{{ route('razen-holiday.landing-page.layanan.index') }}">
+                            @endif
+                                <span class="label">Layanan</span>
+                            </a>
+                        </li>
+                        <li>
+                            @if (request()->routeIs('razen-holiday.landing-page.proyek.index'))
+                                <a href="{{ route('razen-holiday.landing-page.proyek.index') }}" class="active">
+                            @else
+                                <a href="{{ route('razen-holiday.landing-page.proyek.index') }}">
+                            @endif
+                                <span class="label">Proyek</span>
+                            </a>
+                        </li>
+                        <li>
+                            @if (request()->routeIs('razen-holiday.landing-page.kontak.index'))
+                                <a href="{{ route('razen-holiday.landing-page.kontak.index') }}" class="active">
+                            @else
+                                <a href="{{ route('razen-holiday.landing-page.kontak.index') }}">
+                            @endif
+                                <span class="label">Kontak</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- Menu End -->

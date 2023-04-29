@@ -1,3 +1,8 @@
+@php
+    use App\Models\Profil;
+
+    $profil = Profil::first();
+@endphp
 <!DOCTYPE html>
 <html lang="en" data-override='{"attributes": {"color": "light-red" }}'>
     <head>
@@ -18,10 +23,10 @@
                             <div class="w-100 w-lg-75 w-xxl-50">
                                 <div>
                                     <div class="mb-5">
-                                        <h1 class="display-3 text-white">Razen Holiday</h1>
+                                        <h1 class="display-3 text-white">{{$profil->nama}}</h1>
                                     </div>
                                     <p class="h6 text-white lh-1-5 mb-5">
-                                        Razen Holiday Razen Holiday Razen Holiday Razen Holiday Razen Holiday
+                                        {{$profil->deskripsi}}
                                     </p>
                                     <div class="mb-5">
                                         <a class="btn btn-lg btn-outline-white" href="{{ url('/') }}">Kembali</a>

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LandingPageBeranda extends Model
+class LandingPagePerusahaan extends Model
 {
-    protected $table = 'landing_page_berandas';
+    protected $table = 'landing_page_perusahaans';
     protected $guarded = 'id';
 }

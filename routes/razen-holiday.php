@@ -25,6 +25,15 @@ Route::prefix('razen-holiday')->group(function(){
             Route::post('/update','RazenHoliday\Admin\PartnerController@update')->name('razen-holiday.admin.partner.update');
             Route::get('/destroy/{id}','RazenHoliday\Admin\PartnerController@destroy')->name('razen-holiday.admin.partner.destroy');
         });
+
+        Route::prefix('guide')->group(function(){
+            Route::get('/', 'RazenHoliday\Admin\GuideController@index')->name('razen-holiday.admin.guide.index');
+            Route::get('/detail/{id}', 'RazenHoliday\Admin\GuideController@show')->name('razen-holiday.admin.guide.show');
+            Route::post('/','RazenHoliday\Admin\GuideController@store')->name('razen-holiday.admin.guide.store');
+            Route::get('/edit/{id}','RazenHoliday\Admin\GuideController@edit')->name('razen-holiday.admin.guide.edit');
+            Route::post('/update','RazenHoliday\Admin\GuideController@update')->name('razen-holiday.admin.guide.update');
+            Route::get('/destroy/{id}','RazenHoliday\Admin\GuideController@destroy')->name('razen-holiday.admin.guide.destroy');
+        });
     });
 
     Route::prefix('section')->group(function(){

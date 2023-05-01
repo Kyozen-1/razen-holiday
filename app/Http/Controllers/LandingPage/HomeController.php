@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LandingPage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Guide;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,10 @@ class HomeController extends Controller
 
     public function perusahaan()
     {
-        return view('landing-page.perusahaan');
+        $guides = Guide::latest()->get();
+        return view('landing-page.perusahaan',[
+            'guides' => $guides
+        ]);
     }
 
     public function layanan()

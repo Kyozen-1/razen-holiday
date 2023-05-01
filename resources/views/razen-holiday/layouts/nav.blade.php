@@ -81,6 +81,17 @@
                 </li>
 
                 <li>
+                    @if (request()->routeIs('razen-holiday.admin.guide.index'))
+                        <a href="{{ route('razen-holiday.admin.guide.index') }}" class="active">
+                    @else
+                        <a href="{{ route('razen-holiday.admin.guide.index') }}">
+                    @endif
+                        <i data-acorn-icon="home-garage" class="icon" data-acorn-size="18"></i>
+                        <span class="label">Guide</span>
+                    </a>
+                </li>
+
+                <li>
                     @if (request()->routeIs('razen-holiday.admin.partner.index'))
                         <a href="{{ route('razen-holiday.admin.partner.index') }}" class="active">
                     @else

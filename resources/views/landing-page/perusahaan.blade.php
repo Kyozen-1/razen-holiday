@@ -2,17 +2,31 @@
 @section('title', 'Perusahaan | Razen Holiday')
 
 @section('content')
+    @php
+        use App\Models\LandingPagePerusahaan;
+        use App\Models\LandingPageBeranda;
+        use Carbon\Carbon;
+
+        $perusahaan = LandingPagePerusahaan::first();
+
+        $section_1 = json_decode($perusahaan->section_1, true);
+        $section_4 = json_decode($perusahaan->section_4, true);
+
+        $beranda = LandingPageBeranda::first();
+        $beranda_section_2 = json_decode($beranda->section_2, true);
+        $beranda_section_4 = json_decode($beranda->section_4, true);
+    @endphp
     <!-- BreadCrumb Starts -->
-    <section class="breadcrumb-main pb-20 pt-14" style="background-image: url({{asset('travelin/assets/images/bg/bg1.jpg')}});">
+    <section class="breadcrumb-main pb-20 pt-14" style="background-image: url({{ asset('images/landing-page/perusahaan/'.$section_1['gambar']) }});">
         <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url({{asset('travelin/assets/images/shape8.png')}});"></div>
         <div class="breadcrumb-outer">
             <div class="container">
                 <div class="breadcrumb-content text-center">
-                    <h1 class="mb-3">About Us</h1>
+                    <h1 class="mb-3">Perusahaan</h1>
                     <nav aria-label="breadcrumb" class="d-block">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                            <li class="breadcrumb-item"><a href="{{ route('beranda') }}">Beranda</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Perusahaan</li>
                         </ul>
                     </nav>
                 </div>
@@ -29,21 +43,23 @@
                 <div class="row d-flex align-items-center justify-content-between">
                     <div class="col-lg-6 ps-4">
                         <div class="about-content text-center text-lg-start">
-                            <h4 class="theme d-inline-block mb-0">Get To Know Us</h4>
-                            <h2 class="border-b mb-2 pb-1">Explore All Tour of the world with us.</h2>
-                            <p class="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <h4 class="theme d-inline-block mb-0">{{$beranda_section_4?$beranda_section_4['sub_judul'] : ''}}</h4>
+                            <h2 class="border-b mb-2 pb-1">{{$beranda_section_4?$beranda_section_4['judul'] : ''}}</h2>
+                            <p class="border-b mb-2 pb-2">{!! $beranda_section_4?$beranda_section_4['deskripsi'] : '' !!}</p>
                             <div class="about-listing">
                                 <ul class="d-flex justify-content-between">
-                                    <li><i class="icon-location-pin theme"></i> Tour Guide</li>
-                                    <li><i class="icon-briefcase theme"></i> Friendly Price</li>
-                                    <li><i class="icon-folder theme"></i> Reliable Tour Package</li>
+                                    @if ($beranda_section_4['konten'] != '')
+                                        @foreach ($beranda_section_4['konten'] as $item)
+                                            <li><i class="{{$item['ikon']}} theme"></i> {{$item['judul']}}</li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4 pe-4">
                         <div class="about-image" style="animation:none; background:transparent;">
-                            <img src="{{ asset('travelin/assets/images/travel.png') }}" alt="">
+                            <img src="{{ asset('images/landing-page/beranda/'.$beranda_section_4['gambar']) }}" alt="">
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -106,63 +122,30 @@
         <div class="container">
 
             <div class="section-title mb-6 w-50 mx-auto text-center">
-                <h4 class="mb-1 theme1">Core Features</h4>
-                <h2 class="mb-1">Find <span class="theme">Travel Perfection</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <h4 class="mb-1 theme1">{{$beranda_section_2?$beranda_section_2['sub_judul'] : ''}}</h4>
+                <h2 class="mb-1">{{$beranda_section_2?$beranda_section_2['judul'] : ''}}</h2>
+                {!! $beranda_section_2?$beranda_section_2['deskripsi'] : '' !!}
             </div>
 
             <!-- why us starts -->
             <div class="why-us">
                 <div class="why-us-box">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon mb-1">
-                                        <i class="icon-flag theme"></i>
+                        @if ($beranda_section_2['konten'] != '')
+                            @foreach ($beranda_section_2['konten'] as $item)
+                                <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                                    <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white">
+                                        <div class="why-us-content">
+                                            <div class="why-us-icon mb-1">
+                                                <i class="{{$item['ikon']}} theme"></i>
+                                            </div>
+                                            <h4><a href="#">{{$item['judul']}}</a></h4>
+                                            <p class="mb-2">{{$item['deskripsi_singkat']}}</p>
+                                        </div>
                                     </div>
-                                    <h4><a href="about.html">Tell Us What You want To Do</a></h4>
-                                    <p class="mb-2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                                    <p class="mb-0 theme">100+ Reviews</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon mb-1">
-                                        <i class="icon-location-pin theme"></i>
-                                    </div>
-                                    <h4><a href="about.html">Share Your Travel Locations</a></h4>
-                                    <p class="mb-2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                                    <p class="mb-0 theme">100+ Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon mb-1">
-                                        <i class="icon-directions theme"></i>
-                                    </div>
-                                    <h4><a href="about.html">Share Your Travel Preference</a></h4>
-                                    <p class="mb-2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                                    <p class="mb-0 theme">100+ Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon mb-1">
-                                        <i class="icon-compass theme"></i>
-                                    </div>
-                                    <h4><a href="about.html">Here 100% Trusted Tour Agency</a></h4>
-                                    <p class="mb-2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                                    <p class="mb-0 theme">100+ Reviews</p>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -176,71 +159,25 @@
         <div class="container">
 
             <div class="section-title mb-6 w-75 mx-auto text-center">
-                <h4 class="mb-1 theme1">Tour Guides</h4>
-                <h2 class="mb-1">Meet Our <span class="theme">Excellent Guides</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <h4 class="mb-1 theme1">{{$section_4?$section_4['sub_judul'] : ''}}</h4>
+                <h2 class="mb-1">{{$section_4?$section_4['judul'] : ''}}</h2>
+                {!!$section_4?$section_4['deskripsi'] : ''!!}
             </div>
             <div class="team-main">
                 <div class="row shop-slider">
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <div class="team-list rounded">
-                            <div class="team-image">
-                                <img src="{{ asset('travelin/assets/images/team/img1.jpg') }}" alt="team">
-                            </div>
-                            <div class="team-content text-center p-3 bg-theme">
-                               <h4 class="mb-0 white">Salmon Thuir</h4>
-                                <p class="mb-0 white">Senior Agent</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <div class="team-list rounded">
-                            <div class="team-image">
-                                <img src="{{ asset('travelin/assets/images/team/img2.jpg') }}" alt="team">
-                            </div>
-                            <div class="team-content text-center p-3 bg-theme">
-                               <h4 class="mb-0 white">Horke Pels</h4>
-                                <p class="mb-0 white">Head Officer</p>
+                    @foreach ($guides as $guide)
+                        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                            <div class="team-list rounded">
+                                <div class="team-image">
+                                    <img src="{{ asset('images/guide/'.$guide->foto) }}" alt="team">
+                                </div>
+                                <div class="team-content text-center p-3 bg-theme">
+                                    <h4 class="mb-0 white">{{$guide->nama}}</h4>
+                                    <p class="mb-0 white">{{$guide->jabatan}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <div class="team-list rounded">
-                            <div class="team-image">
-                                <img src="{{ asset('travelin/assets/images/team/img4.jpg') }}" alt="team">
-                            </div>
-                            <div class="team-content text-center p-3 bg-theme">
-                               <h4 class="mb-0 white">Solden kalos</h4>
-                                <p class="mb-0 white">Supervisor</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <div class="team-list rounded">
-                            <div class="team-image">
-                                <img src="{{ asset('travelin/assets/images/team/img3.jpg') }}" alt="team">
-                            </div>
-                            <div class="team-content text-center p-3 bg-theme">
-                               <h4 class="mb-0 white">Nelson Bam</h4>
-                                <p class="mb-0 white">Quality Assurance</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <div class="team-list rounded">
-                            <div class="team-image">
-                                <img src="{{ asset('travelin/assets/images/team/img4.jpg') }}" alt="team">
-                            </div>
-                            <div class="team-content text-center bg-theme p-3">
-                               <h4 class="mb-0 white">Cacics Coold</h4>
-                                <p class="mb-0 white">Asst. Manager</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

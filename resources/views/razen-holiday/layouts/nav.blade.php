@@ -7,9 +7,9 @@
     <div class="nav-content d-flex">
         <!-- Logo Start -->
         <div class="logo position-relative">
-            <a href="index.html">
+            <a href="{{ route('razen-holiday.admin.dashboard.index') }}">
             <!-- Logo can be added directly -->
-            <img src="{{ asset('images/razen-holiday/logo/642b9aa063e73-230404.png') }}" alt="logo" />
+            <img src="{{ asset('images/razen-holiday/logo/'.$profil->logo) }}" alt="logo" />
 
             <!-- Or added via css to provide different ones for different color themes -->
             {{-- <div class="img"></div> --}}
@@ -77,6 +77,17 @@
                     @endif
                         <i data-acorn-icon="home-garage" class="icon" data-acorn-size="18"></i>
                         <span class="label">Profil</span>
+                    </a>
+                </li>
+
+                <li>
+                    @if (request()->routeIs('razen-holiday.admin.partner.index'))
+                        <a href="{{ route('razen-holiday.admin.partner.index') }}" class="active">
+                    @else
+                        <a href="{{ route('razen-holiday.admin.partner.index') }}">
+                    @endif
+                        <i data-acorn-icon="home-garage" class="icon" data-acorn-size="18"></i>
+                        <span class="label">Partner</span>
                     </a>
                 </li>
 
@@ -159,6 +170,28 @@
                                 <a href="{{ route('razen-holiday.landing-page.kontak.index') }}">
                             @endif
                                 <span class="label">Kontak</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    @if (request()->routeIs('razen-holiday.section.testimonial.index'))
+                    <a href="#section" class="active">
+                    @else
+                    <a href="#section">
+                    @endif
+                        <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
+                        <span class="label">Section</span>
+                    </a>
+                    <ul id="section">
+                        <li>
+                            @if (request()->routeIs('razen-holiday.section.testimonial.index'))
+                                <a href="{{ route('razen-holiday.section.testimonial.index') }}" class="active">
+                            @else
+                                <a href="{{ route('razen-holiday.section.testimonial.index') }}">
+                            @endif
+                                <span class="label">Testimonial</span>
                             </a>
                         </li>
                     </ul>

@@ -1,3 +1,11 @@
+@php
+    use App\Models\Profil;
+    use Carbon\Carbon;
+    use App\Models\PivotProfilMediaSosial;
+
+    $profil = Profil::first();
+    $pivot_profil_media_sosials = PivotProfilMediaSosial::where('profil_id', $profil->id)->get();
+@endphp
 <footer class="pt-20 pb-4" style="background-image: url({{asset('travelin/assets/images/background_pattern.png')}});">
     <div class="section-shape top-0" style="background-image: url({{asset('travelin/assets/images/shape8.png')}});"></div>
     <!-- Instagram starts -->
@@ -63,42 +71,30 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4 pe-4">
                     <div class="footer-about">
-                        <img src="{{ asset('travelin/assets/images/logo-white.png') }}" alt="">
+                        <img src="{{ asset('images/razen-holiday/logo/'.$profil->logo) }}" alt="">
                         <p class="mt-3 mb-3 white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio suspendisse leo neque
-                            iaculis molestie sagittis maecenas aenean eget molestie sagittis.
+                            {!! $profil->deskripsi !!}
                         </p>
                         <ul>
-                            <li class="white"><strong>PO Box:</strong> +47-252-254-2542</li>
-                            <li class="white"><strong>Location:</strong> Collins Street, sydney, Australia</li>
-                            <li class="white"><strong>Email:</strong> info@Travelin.com</li>
-                            <li class="white"><strong>Website:</strong> www.Travelin.com</li>
+                            <li class="white"><strong>Telepon:</strong> {{$profil->no_hp}}</li>
+                            <li class="white"><strong>Lokasi:</strong> {{$profil->alamat}}</li>
+                            <li class="white"><strong>Email:</strong> {{$profil->email}}</li>
+                            <li class="white"><strong>Website:</strong> www.razenholiday.com</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
-                        <h3 class="white">Quick link</h3>
+                        <h3 class="white">Tautan cepat</h3>
                         <ul>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="about-us.html">Delivery Information</a></li>
-                            <li><a href="about-us.html">Privacy Policy</a></li>
-                            <li><a href="about-us.html">Terms &amp; Conditions</a></li>
-                            <li><a href="about-us.html">Customer Service</a></li>
-                            <li><a href="#about-us.html">Return Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
-                    <div class="footer-links">
-                        <h3 class="white">Categories</h3>
-                        <ul>
-                            <li><a href="about-us.html">Travel</a></li>
-                            <li><a href="about-us.html">Technology</a></li>
-                            <li><a href="about-us.html">Lifestyle</a></li>
-                            <li><a href="about-us.html">Destinations</a></li>
-                            <li><a href="about-us.html">Entertainment</a></li>
-                            <li><a href="about-us.html">Business</a></li>
+                            <li><a href="{{ route('beranda') }}">Beranda</a></li>
+                            <li><a href="{{ route('perusahaan') }}">Perusahaan</a></li>
+                            <li><a href="{{ route('layanan') }}">Layanan</a></li>
+                            <li><a href="https://shop.razen.co.id/stores/razen-holiday" target="blank">E-Commerce</a></li>
+                            <li><a href="#">E-Learning</a></li>
+                            <li><a href="{{ route('proyek') }}">Proyek</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="{{ route('kontak') }}">Kontak</a></li>
                         </ul>
                     </div>
                 </div>
@@ -124,14 +120,13 @@
         <div class="container">
             <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
                 <div class="copyright-text">
-                    <p class="m-0 white">2022 Travelin. All rights reserved.</p>
+                    <p class="m-0 white">{{Carbon::now()->year}} {{$profil->pt}}. All rights reserved.</p>
                 </div>
                 <div class="social-links">
                     <ul>
-                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                        @foreach ($pivot_profil_media_sosials as $item)
+                            <li><a href="{{$item->tautan}}" target="blank"><i class="{{$item->media_sosial->kode_ikon}}" aria-hidden="true"></i></a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

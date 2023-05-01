@@ -16,6 +16,29 @@ Route::prefix('razen-holiday')->group(function(){
             Route::post('/edit-media-sosial-profil', 'RazenHoliday\Admin\ProfilController@edit_media_sosial_profil')->name('razen-holiday.admin.profil.edit-media-sosial-profil');
             Route::post('/tambah-media-sosial-profil', 'RazenHoliday\Admin\ProfilController@tambah_media_sosial_profil')->name('razen-holiday.admin.profil.tambah-media-sosial-profil');
         });
+
+        Route::prefix('partner')->group(function(){
+            Route::get('/', 'RazenHoliday\Admin\PartnerController@index')->name('razen-holiday.admin.partner.index');
+            Route::get('/detail/{id}', 'RazenHoliday\Admin\PartnerController@show')->name('razen-holiday.admin.partner.show');
+            Route::post('/','RazenHoliday\Admin\PartnerController@store')->name('razen-holiday.admin.partner.store');
+            Route::get('/edit/{id}','RazenHoliday\Admin\PartnerController@edit')->name('razen-holiday.admin.partner.edit');
+            Route::post('/update','RazenHoliday\Admin\PartnerController@update')->name('razen-holiday.admin.partner.update');
+            Route::get('/destroy/{id}','RazenHoliday\Admin\PartnerController@destroy')->name('razen-holiday.admin.partner.destroy');
+        });
+    });
+
+    Route::prefix('section')->group(function(){
+        Route::prefix('testimonial')->group(function(){
+            Route::get('/', 'RazenHoliday\Section\TestimonialController@index')->name('razen-holiday.section.testimonial.index');
+
+            Route::post('/section/store', 'RazenHoliday\Section\TestimonialController@section_store')->name('razen-holiday.section.testimonial.section.store');
+
+            Route::get('/detail/{id}', 'RazenHoliday\Section\TestimonialController@show')->name('razen-holiday.section.testimonial.show');
+            Route::post('/','RazenHoliday\Section\TestimonialController@store')->name('razen-holiday.section.testimonial.store');
+            Route::get('/edit/{id}','RazenHoliday\Section\TestimonialController@edit')->name('razen-holiday.section.testimonial.edit');
+            Route::post('/update','RazenHoliday\Section\TestimonialController@update')->name('razen-holiday.section.testimonial.update');
+            Route::get('/destroy/{id}','RazenHoliday\Section\TestimonialController@destroy')->name('razen-holiday.section.testimonial.destroy');
+        });
     });
 
     Route::prefix('landing-page')->group(function(){

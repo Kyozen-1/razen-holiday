@@ -2,22 +2,38 @@
 @section('title', 'Beranda | Razen Holiday')
 
 @section('content')
+    @php
+        use App\Models\LandingPageBeranda;
+        use Carbon\Carbon;
+
+        $beranda = LandingPageBeranda::first();
+
+        $section_1 = json_decode($beranda->section_1, true);
+        $section_2 = json_decode($beranda->section_2, true);
+        $section_3 = json_decode($beranda->section_3, true);
+        $section_4 = json_decode($beranda->section_4, true);
+        $section_5 = json_decode($beranda->section_5, true);
+        $section_6 = json_decode($beranda->section_6, true);
+        $section_7 = json_decode($beranda->section_7, true);
+        $section_8 = json_decode($beranda->section_8, true);
+        $section_9 = json_decode($beranda->section_9, true);
+        $section_10 = json_decode($beranda->section_10, true);
+    @endphp
     <!-- banner starts -->
-    <section class="banner pt-10 pb-0 overflow-hidden" style="background-image:url({{asset('travelin/assets/images/testimonial.png')}});">
+    <section class="banner pt-10 pb-0 overflow-hidden" style="background-image:url({{ asset('images/landing-page/beranda/'.$section_1['gambar_background']) }});">
         <div class="container">
             <div class="banner-in">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4">
                         <div class="banner-content text-lg-start text-center">
-                            <h4 class="theme mb-0">Explore The World</h4>
-                            <h1>Start Planning Your Dream Trip Today!</h1>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore</p>
+                            <h4 class="theme mb-0">{{$section_1?$section_1['sub_judul']:'' }}</h4>
+                            <h1>{{$section_1?$section_1['judul']:'' }}</h1>
+                            {!!$section_1?$section_1['deskripsi']:'' !!}
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4">
                         <div class="banner-image">
-                            <img src="{{ asset('travelin/assets/images/travel.png') }}" alt="">
+                            <img src="{{ asset('images/landing-page/beranda/'.$section_1['gambar']) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -90,60 +106,30 @@
         <div class="container">
 
             <div class="section-title mb-6 w-50 mx-auto text-center">
-                <h4 class="mb-1 theme1">3 Step of The Perfect Tour</h4>
-                <h2 class="mb-1">Find <span class="theme">Travel Perfection</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                </p>
+                <h4 class="mb-1 theme1">{{$section_2?$section_2['sub_judul'] : ''}}</h4>
+                <h2 class="mb-1">{{$section_2?$section_2['judul'] : ''}}</h2>
+                {!! $section_2?$section_2['deskripsi'] : '' !!}
             </div>
 
             <!-- why us starts -->
             <div class="why-us">
                 <div class="why-us-box">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon">
-                                        <i class="icon-flag theme"></i>
+                        @if ($section_2['konten'] != '')
+                            @foreach ($section_2['konten'] as $item)
+                                <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                                    <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                                        <div class="why-us-content">
+                                            <div class="why-us-icon">
+                                                <i class="{{$item['ikon']}} theme"></i>
+                                            </div>
+                                            <h4><a href="{{ route('perusahaan') }}">{{$item['judul']}}</a></h4>
+                                            <p class="mb-0">{{$item['deskripsi_singkat']}}</p>
+                                        </div>
                                     </div>
-                                    <h4><a href="about.html">Tell Us What You want To Do</a></h4>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon">
-                                        <i class="icon-location-pin theme"></i>
-                                    </div>
-                                    <h4><a href="about.html">Share Your Travel Locations</a></h4>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon">
-                                        <i class="icon-directions theme"></i>
-                                    </div>
-                                    <h4><a href="about.html">Share Your Travel Preference</a></h4>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                            <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                                <div class="why-us-content">
-                                    <div class="why-us-icon">
-                                        <i class="icon-compass theme"></i>
-                                    </div>
-                                    <h4><a href="about.html">We are 100% Trusted Tour Agency</a></h4>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -157,10 +143,9 @@
     <section class="trending pb-5 pt-0">
         <div class="container">
             <div class="section-title mb-6 w-50 mx-auto text-center">
-                <h4 class="mb-1 theme1">Top Destinations</h4>
-                <h2 class="mb-1">Explore <span class="theme">Top Destinations</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                </p>
+                <h4 class="mb-1 theme1">{{$section_3?$section_3['sub_judul']:'' }}s</h4>
+                <h2 class="mb-1">{{$section_3?$section_3['judul']:'' }}</h2>
+                {!! $section_3?$section_3['deskripsi'] : '' !!}
             </div>
             <div class="row align-items-center">
                 <div class="col-lg-5 mb-4">
@@ -258,29 +243,27 @@
     <!-- top Destination ends -->
 
     <!-- about-us starts -->
-    <section class="about-us pt-0" style="background-image:url({{asset('travelin/assets/images/bg/bg-trans.png')}});">
+    <section class="about-us pt-0" style="background-image:url({{ asset('images/landing-page/beranda/'.$section_4['gambar_background']) }});">
         <div class="container">
             <div class="about-image-box">
                 <div class="row d-flex align-items-center justify-content-between">
                     <div class="col-lg-6 mb-4 pe-4">
                         <div class="about-image overflow-hidden">
-                            <img src="{{ asset('travelin/assets/images/travel1.png') }}" alt="">
+                            <img src="{{ asset('images/landing-page/beranda/'.$section_4['gambar']) }}" alt="">
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4 ps-4">
                         <div class="about-content text-center text-lg-start mb-4">
-                            <h4 class="theme d-inline-block mb-0">Get To Know Us</h4>
-                            <h2 class="border-b mb-2 pb-1">Explore All Tour of the world with us.</h2>
-                            <p class="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.<br><br>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.</p>
+                            <h4 class="theme d-inline-block mb-0">{{$section_4?$section_4['sub_judul'] : ''}}</h4>
+                            <h2 class="border-b mb-2 pb-1">{{$section_4?$section_4['judul'] : ''}}</h2>
+                            <p class="border-b mb-2 pb-2">{!! $section_4?$section_4['deskripsi'] : '' !!}</p>
                             <div class="about-listing">
                                 <ul class="d-flex justify-content-between">
-                                    <li><i class="icon-location-pin theme"></i> Tour Guide</li>
-                                    <li><i class="icon-briefcase theme"></i> Friendly Price</li>
-                                    <li><i class="icon-folder theme"></i> Reliable Tour Package</li>
+                                    @if ($section_4['konten'] != '')
+                                        @foreach ($section_4['konten'] as $item)
+                                            <li><i class="{{$item['ikon']}} theme"></i> {{$item['judul']}}</li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -345,10 +328,9 @@
             <div class="row align-items-center justify-content-between mb-6 ">
                 <div class="col-lg-7">
                     <div class="section-title text-center text-lg-start">
-                        <h4 class="mb-1 theme1">Top Pick</h4>
-                        <h2 class="mb-1">Best <span class="theme">Tour Packages</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore.</p>
+                        <h4 class="mb-1 theme1">{{$section_5?$section_5['sub_judul']:'' }}</h4>
+                        <h2 class="mb-1">{{$section_5?$section_5['judul']:'' }}</h2>
+                        {!! $section_5?$section_5['deskripsi'] : '' !!}
                     </div>
                 </div>
                 <div class="col-lg-5">
@@ -514,10 +496,9 @@
     <section class="trending pb-0 pt-6" style="background-image: url({{asset('travelin/assets/images/shape2.png')}});">
         <div class="container">
             <div class="section-title mb-6 w-75 mx-auto text-center">
-                <h4 class="mb-1 theme1">Top Deals</h4>
-                <h2 class="mb-1">The Last <span class="theme">Minute Deals</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                </p>
+                <h4 class="mb-1 theme1">{{$section_6?$section_6['sub_judul']:'' }}</h4>
+                <h2 class="mb-1">{{$section_6?$section_6['judul']:'' }}</h2>
+                {!! $section_6?$section_6['deskripsi'] : '' !!}
             </div>
             <div class="trend-box">
                 <div class="row">
@@ -773,7 +754,7 @@
 
     <!-- Discount action starts -->
     <section class="discount-action pt-6"
-        style="background-image:url({{asset('travelin/assets/images/section-bg1.png')}}); background-position:center;">
+        style="background-image:url({{ asset('images/landing-page/beranda/'.$section_7['gambar']) }}); background-position:center;">
         <div class="section-shape section-shape1 top-inherit bottom-0"
             style="background-image: url({{asset('travelin/assets/images/shape8.png')}});"></div>
         <div class="container">
@@ -781,11 +762,9 @@
                 <div class="call-banner-inner w-75 mx-auto text-center px-5">
                     <div class="trend-content-main">
                         <div class="trend-content mb-5 pb-2 px-5">
-                            <h5 class="mb-1 theme">Love Where Your're Going</h5>
-                            <h2><a href="detail-fullwidth.html">Explore Your Life, <span class="theme1"> Travel Where
-                                        You Want!</span></a></h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+                            <h5 class="mb-1 theme">{{$section_7?$section_7['sub_judul'] : ''}}</h5>
+                            <h2><a href="#">{!!$section_7?$section_7['judul'] : ''!!}</a></h2>
+                            {!! $section_7?$section_7['deskripsi'] : '' !!}
                         </div>
                         <div class="video-button text-center position-relative">
                             <div class="call-button text-center">
@@ -808,10 +787,9 @@
     <section class="trending pb-0 pt-4">
         <div class="container">
             <div class="section-title mb-6 w-75 mx-auto text-center">
-                <h4 class="mb-1 theme1">Top Offers</h4>
-                <h2 class="mb-1">Special <span class="theme">Offers & Discount </span> Packages</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                </p>
+                <h4 class="mb-1 theme1">{{$section_8?$section_8['sub_judul']:'' }}</h4>
+                <h2 class="mb-1">{{$section_8?$section_8['judul']:'' }}</h2>
+                <p>{!! $section_8?$section_8['deskripsi'] : '' !!}</p>
             </div>
             <div class="trend-box">
                 <div class="row">
@@ -939,10 +917,9 @@
         <div class="container">
 
             <div class="section-title mb-6 w-75 mx-auto text-center">
-                <h4 class="mb-1 theme1">Tour Guides</h4>
-                <h2 class="mb-1">Meet Our <span class="theme">Excellent Guides</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                </p>
+                <h4 class="mb-1 theme1">{{$section_9?$section_9['sub_judul']:'' }}</h4>
+                <h2 class="mb-1">{{$section_9?$section_9['judul']:'' }}</h2>
+                {!! $section_9?$section_9['deskripsi'] : '' !!}
             </div>
             <div class="team-main">
                 <div class="row shop-slider">
@@ -1015,10 +992,9 @@
     <section class="trending recent-articles pb-6">
         <div class="container">
             <div class="section-title mb-6 w-75 mx-auto text-center">
-                <h4 class="mb-1 theme1">Our Blogs Offers</h4>
-                <h2 class="mb-1">Recent <span class="theme">Articles & Posts</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                </p>
+                <h4 class="mb-1 theme1">{{$section_10?$section_10['sub_judul']:'' }}</h4>
+                <h2 class="mb-1">{!!$section_10?$section_10['judul']:'' !!}</h2>
+                {!! $section_10?$section_10['deskripsi'] : '' !!}
             </div>
             <div class="recent-articles-inner">
                 <div class="row">

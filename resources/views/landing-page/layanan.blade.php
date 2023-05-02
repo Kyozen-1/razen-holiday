@@ -2,17 +2,29 @@
 @section('title', 'Layanan | Razen Holiday')
 
 @section('content')
+    @php
+        use App\Models\LandingPageLayanan;
+        use App\Models\LandingPageBeranda;
+
+        $Layanan = LandingPageLayanan::first();
+
+        $section_1 = json_decode($Layanan->section_1, true);
+
+        $beranda = LandingPageBeranda::first();
+
+        $beranda_section_7 = json_decode($beranda->section_7, true);
+    @endphp
     <!-- BreadCrumb Starts -->
-    <section class="breadcrumb-main pb-20 pt-14" style="background-image: url({{asset('travelin/assets/images/bg/bg1.jpg')}});">
+    <section class="breadcrumb-main pb-20 pt-14" style="background-image: url({{ asset('images/landing-page/layanan/'.$section_1['gambar']) }});">
         <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url({{asset('travelin/assets/images/shape8.png')}});"></div>
         <div class="breadcrumb-outer">
             <div class="container">
                 <div class="breadcrumb-content text-center">
-                    <h1 class="mb-3">Tour List</h1>
+                    <h1 class="mb-3">Layanan</h1>
                     <nav aria-label="breadcrumb" class="d-block">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tour Lists Rightside</li>
+                            <li class="breadcrumb-item"><a href="{{ route('beranda') }}">Beranda</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Layanan</li>
                         </ul>
                     </nav>
                 </div>
@@ -397,15 +409,15 @@
     <!-- top Destination ends -->
 
     <!-- Discount action starts -->
-    <section class="discount-action pt-0" style="background-image:url({{asset('travelin/assets/images/section-bg1.png')}}); background-position:center;">
+    <section class="discount-action pt-0" style="background-image:url({{ asset('images/landing-page/beranda/'.$beranda_section_7['gambar']) }}); background-position:center;">
         <div class="container">
             <div class="call-banner rounded pt-10 pb-14">
                 <div class="call-banner-inner w-75 mx-auto text-center px-5">
                     <div class="trend-content-main">
                         <div class="trend-content mb-5 pb-2 px-5">
-                            <h5 class="mb-1 theme">Love Where Your're Going</h5>
-                            <h2><a href="detail-fullwidth.html">Explore Your Life, <span class="theme1"> Travel Where You Want!</span></a></h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h5 class="mb-1 theme">{{$beranda_section_7?$beranda_section_7['sub_judul'] : ''}}</h5>
+                            <h2><a href="#">{!!$beranda_section_7?$beranda_section_7['judul'] : ''!!}</a></h2>
+                            {!! $beranda_section_7?$beranda_section_7['deskripsi'] : '' !!}
                         </div>
                         <div class="video-button text-center position-relative">
                              <div class="call-button text-center">

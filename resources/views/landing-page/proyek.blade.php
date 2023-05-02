@@ -2,17 +2,25 @@
 @section('title', 'Proyek | Razen Holiday')
 
 @section('content')
+    @php
+        use App\Models\LandingPageProyek;
+
+        $proyek = LandingPageProyek::first();
+
+        $section_1 = json_decode($proyek->section_1, true);
+        $section_2 = json_decode($proyek->section_2, true);
+    @endphp
     <!-- BreadCrumb Starts -->
-    <section class="breadcrumb-main pb-20 pt-14" style="background-image: url({{asset('travelin/assets/images/bg/bg1.jpg')}});">
+    <section class="breadcrumb-main pb-20 pt-14" style="background-image: url({{ asset('images/landing-page/proyek/'.$section_1['gambar']) }});">
         <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url({{asset('travelin/assets/images/shape8.png')}});"></div>
         <div class="breadcrumb-outer">
             <div class="container">
                 <div class="breadcrumb-content text-center">
-                    <h1 class="mb-3">Gallery One</h1>
+                    <h1 class="mb-3">Proyek</h1>
                     <nav aria-label="breadcrumb" class="d-block">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Gallery One</li>
+                            <li class="breadcrumb-item"><a href="{{ route('beranda') }}">Beranda</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Proyek</li>
                         </ul>
                     </nav>
                 </div>
@@ -26,9 +34,9 @@
     <div class="gallery pt-6 pb-0">
         <div class="container">
             <div class="section-title mb-6 text-center w-75 mx-auto">
-                <h4 class="mb-1 theme1">Our Gallery</h4>
-                <h2 class="mb-1">Some Beautiful <span class="theme">Snapshoots</span></h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <h4 class="mb-1 theme1">{{$section_2?$section_2['sub_judul'] : ''}}</h4>
+                <h2 class="mb-1">{{$section_2?$section_2['judul'] : ''}}</h2>
+                {!!$section_2?$section_2['deskripsi'] : ''!!}
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

@@ -39,62 +39,16 @@
                 </div>
                 <div class="category-main-inner border-t pt-1">
                     <div class="row side-slider">
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <div class="trending-topic-content">
-                                    <img src="{{ asset('travelin/assets/images/icons/004-camping-tent.png') }}" class="mb-1 d-inline-block" alt="">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Camping</a></h4>
+                        @foreach ($kategoris as $kategori)
+                            <div class="col-lg-3 col-md-6 my-4">
+                                <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
+                                    <div class="trending-topic-content">
+                                        <img src="{{env('RAZEN_URL')}}storage/{{$kategori->image}}" class="mb-1 d-inline-block" alt="">
+                                        <h4 class="mb-0"><a href="#">{{$kategori->name}}</a></h4>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <div class="trending-topic-content text-center">
-                                    <img src="{{ asset('travelin/assets/images/icons/003-hiking.png') }}" class="mb-1 d-inline-block" alt="">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Hiking</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <div class="trending-topic-content">
-                                    <img src="{{ asset('travelin/assets/images/icons/005-sunbed.png') }}" class="mb-1 d-inline-block" alt="">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Beach Tours</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <div class="trending-topic-content">
-                                    <img src="{{ asset('travelin/assets/images/icons/006-surf.png') }}" class="mb-1 d-inline-block" alt="">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Surfing</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <div class="trending-topic-content">
-                                    <img src="{{ asset('travelin/assets/images/icons/002-safari.png') }}" class="mb-1 d-inline-block" alt="">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Safari</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <div class="trending-topic-content">
-                                    <img src="{{ asset('travelin/assets/images/icons/008-cycling.png') }}" class="mb-1 d-inline-block" alt="">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Cycling</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 my-4">
-                            <div class="category-item box-shadow p-3 py-4 text-center bg-white rounded overflow-hidden">
-                                <img src="{{ asset('travelin/assets/images/icons/007-hiking-1.png') }}" class="mb-1 d-inline-block" alt="">
-                                <div class="trending-topic-content">
-                                    <h4 class="mb-0"><a href="tour-grid.html">Trekings</a></h4>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -497,7 +451,7 @@
         <div class="container">
             <div class="section-title mb-6 w-75 mx-auto text-center">
                 <h4 class="mb-1 theme1">{{$section_6?$section_6['sub_judul']:'' }}</h4>
-                <h2 class="mb-1">{{$section_6?$section_6['judul']:'' }}</h2>
+                <h2 class="mb-1">{!!$section_6?$section_6['judul']:'' !!}</h2>
                 {!! $section_6?$section_6['deskripsi'] : '' !!}
             </div>
             <div class="trend-box">
@@ -788,7 +742,7 @@
         <div class="container">
             <div class="section-title mb-6 w-75 mx-auto text-center">
                 <h4 class="mb-1 theme1">{{$section_8?$section_8['sub_judul']:'' }}</h4>
-                <h2 class="mb-1">{{$section_8?$section_8['judul']:'' }}</h2>
+                <h2 class="mb-1">{!!$section_8?$section_8['judul']:'' !!}</h2>
                 <p>{!! $section_8?$section_8['deskripsi'] : '' !!}</p>
             </div>
             <div class="trend-box">
@@ -918,7 +872,7 @@
 
             <div class="section-title mb-6 w-75 mx-auto text-center">
                 <h4 class="mb-1 theme1">{{$section_9?$section_9['sub_judul']:'' }}</h4>
-                <h2 class="mb-1">{{$section_9?$section_9['judul']:'' }}</h2>
+                <h2 class="mb-1">{!!$section_9?$section_9['judul']:'' !!}</h2>
                 {!! $section_9?$section_9['deskripsi'] : '' !!}
             </div>
             <div class="team-main">

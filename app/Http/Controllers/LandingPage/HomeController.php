@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 use App\Models\Guide;
 use Validator;
 use Illuminate\Support\Facades\Mail;
+use GuzzleHttp\Client as GuzzleHttpClient;
 
 class HomeController extends Controller
 {
     public function beranda()
     {
-        return view('landing-page.index');
+        $guzzleClient = new GuzzleHttpClient();
+
+        $get_kategori = $guzzleClient->get(env('RAZEN_URL').'api/product/category/razen-holiday');
+        $kategoris = json_decode($get_kategori->getBody())->data;
+        return view('landing-page.index', [
+            'kategoris' => $kategoris
+        ]);
     }
 
     public function perusahaan()
@@ -25,7 +32,18 @@ class HomeController extends Controller
 
     public function layanan()
     {
-        return view('landing-page.layanan');
+        $guzzleClient = new GuzzleHttpClient();
+
+        $get_kategori = $guzzleClient->get(env('RAZEN_URL').'api/product/razen-holiday/kategori');
+        $kategoris = json_decode($get_kategori->getBody())->data;
+
+        $get_products = $guzzleClient->get(env('RAZEN_URL').'api/product/razen-holiday/produk');
+        $products = json_decode($get_products->getBody())->data;
+
+        return view('landing-page.layanan', [
+            'kategoris' => $kategoris,
+            'products' => $products
+        ]);
     }
 
     public function proyek()
